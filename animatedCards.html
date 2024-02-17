@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Cards</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: grid;
+        place-content: center;
+        width: 100dvw;
+        height: 100dvh;
+        background: #023047;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        width: 100vw;
+        max-width: max-content;
+        padding: 12px;
+      }
+      .container .social-card {
+        width: 200px;
+        aspect-ratio: 1;
+        display: grid;
+        place-content: center;
+        background: linear-gradient(#fff2, transparent);
+        border: 1px solid rgba(119, 116, 116, 0.3);
+        box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+          rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        color: white;
+        backdrop-filter: blur(12px);
+        border-radius: 8px;
+
+        /* text styling */
+        font-size: 48px;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        /* rotating each box */
+        margin: 0 -125px;
+        rotate: var(--r);
+
+        cursor: pointer;
+        transition: 500ms;
+        overflow: hidden;
+      }
+
+      .container .social-card::before {
+        content: attr(data-name);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+        font-weight: 700;
+        color: white;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- U can place images instead of the icons -->
+    <div class="container">
+      <div class="social-card" data-name="facebook" style="--r: -15deg">
+        <i class="bx bxl-facebook-circle"></i>
+      </div>
+      <div class="social-card" data-name="instagram" style="--r: 5deg">
+        <i class="bx bxl-instagram-alt"></i>
+      </div>
+      <div class="social-card" data-name="linkedin" style="--r: 25deg">
+        <i class="bx bxl-linkedin-square"></i>
+      </div>
+      <div class="social-card" data-name="github" style="--r: -15deg">
+        <i class="bx bxl-github"></i>
+      </div>
+    </div>
+
+    <script>
+      let container = document.querySelector(".container"),
+        socialCard = document.querySelectorAll(".social-card");
+      container.addEventListener("mouseenter", () => {
+        socialCard.forEach((e) => {
+          e.style.margin = "0";
+          e.style.rotate = "0deg";
+        });
+      });
+      container.addEventListener("mouseleave", () => {
+        socialCard.forEach((e) => {
+          e.style.margin = "0 -120px";
+          e.style.rotate = `var(--r)`;
+        });
+      });
+    </script>
+  </body>
+</html>
